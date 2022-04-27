@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash, abort
+from flask import Flask, render_template, redirect, url_for, flash, abort, request
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
 from datetime import date
@@ -10,6 +10,7 @@ from flask_gravatar import Gravatar
 from functools import wraps
 from sqlalchemy import Integer, ForeignKey
 from sqlalchemy.orm import relationship
+from contact import Contact
 
 
 app = Flask(__name__)
@@ -164,9 +165,25 @@ def about():
     return render_template("about.html")
 
 
-@app.route("/contact")
-def contact():
-    return render_template("contact.html")
+@app.route("/contact", methods=["GET", "POST"])
+def contact_page():
+    contact = Contact()
+
+    if request.method == "POST":
+        # data = request.form
+        email_data = {
+            "name": request.form["name"],
+            "email": request.form["email"],
+            "number": request.form["phone"],
+            "message": request.form["message"]
+        }
+        print(email_data)
+
+        contact.send_email(email_data)
+        return render_template("contact.html", message="Successfully sent your message!")
+
+    return render_template("contact.html", message="Contact me")
+
 
 
 @app.route("/new-post", methods=["GET", "POST"])
