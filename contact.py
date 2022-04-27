@@ -1,10 +1,11 @@
+import os
 import smtplib
 
 
 class Contact:
     def __init__(self):
-        self.my_email = "your_email"
-        self.password = "your_password"
+        self.my_email = os.environ.get("MY_EMAIL")
+        self.password = os.environ.get("EMAIL_PASSWORD")
 
     def send_email(self, data):
         msg = f"Subject:Blog_response\n\nName: {data['name']}\nEmail: {data['email']}\nPhone: {data['number']}\nMessage: {data['message']}"
