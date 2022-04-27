@@ -4,13 +4,12 @@ from flask_ckeditor import CKEditor
 from datetime import date
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
+from flask_login import UserMixin, login_user, LoginManager, current_user, logout_user
 from forms import CreatePostForm, RegisterUser, LoginForm, CommentForm
 from flask_gravatar import Gravatar
 from functools import wraps
-from sqlalchemy import Table, Column, Integer, ForeignKey
+from sqlalchemy import Integer, ForeignKey
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
 
 
 app = Flask(__name__)
@@ -24,6 +23,7 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
 
 def admin_only(f):
     @wraps(f)
