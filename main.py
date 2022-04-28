@@ -178,7 +178,7 @@ def contact_page():
             "message": request.form["message"]
         }
 
-        contact.send_email(email_data)
+        contact.send_simple_message(email_data)
         return render_template("contact.html", message="Successfully sent your message!")
 
     return render_template("contact.html", message="Contact me")
