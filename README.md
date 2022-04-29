@@ -1,7 +1,7 @@
 # Flask-Blog
 This is a personal blog site written in Python (Flask).
 
-Technologies: Python+Jinja, Flask, Bootstrap, Jinja, Postgresql, Heroku
+Technologies: Python+Jinja, Flask, Bootstrap, Postgresql, Heroku
 
 Principles: DRY, KISS
 
