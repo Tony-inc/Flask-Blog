@@ -23,6 +23,7 @@ Bootstrap(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -49,6 +50,7 @@ db = SQLAlchemy(app)
 gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=False, force_lower=False, use_ssl=False, base_url=None)
 
 ##CONFIGURE TABLES
+
 
 class User(UserMixin, db.Model):
     __tablename__ = "users"
@@ -184,7 +186,6 @@ def contact_page():
         return render_template("contact.html", message="Successfully sent your message!")
 
     return render_template("contact.html", message="Contact me")
-
 
 
 @app.route("/new-post", methods=["GET", "POST"])
